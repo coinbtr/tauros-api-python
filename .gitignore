@@ -1,1 +1,6 @@
 .env
+
+build
+dist
+
+tauros_api.egg-info/

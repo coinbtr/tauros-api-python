@@ -14,14 +14,14 @@ tauros = TaurosAPI(
   api_secret='<secret-key>'
 )
 
-uri = '/api/v2/example/'
+path = '/api/v2/example/'
 
 data = {
   'key1': 'value',
   'key2': 'value'
 }
 
-response = tauros.post(uri, data)
+response = tauros.post(path, data)
 
 print(response.status_code) # 200
 

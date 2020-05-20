@@ -109,6 +109,13 @@ class TaurosAPI():
 
         return api_signature.decode()
 
+    def _nonce(self):
+        """
+        :returns: an always-increasing unsigned integer (up to 64 bits wide)
+        """
+        return int(1000*time.time())
+
+
     def _signed_request(self, path, data):
         """
         :param path: destination route sans host
@@ -119,6 +126,8 @@ class TaurosAPI():
 
         :returns: response data
         """
+        # set nonce field to request body
+        data['nonce'] = self._nonce()
         signature = self._sign(data)
         headers = {
             'Taur-Signature': signature

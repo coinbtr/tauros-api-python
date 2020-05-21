@@ -11,7 +11,6 @@ from tauros_api import exceptions
 URIs = {
     'production': 'https://api.tauros.io',
     'staging': 'https://api.staging.tauros.io',
-    'local': 'http://localhost:8000' # borrar antes de subir cambio
 }
 
 
@@ -40,7 +39,7 @@ class TaurosAPI():
         :param environment: API environment ('production', staging) by default is 'production'
         :type environment: str
         """
-        if not environment in ['production', 'staging', 'local']: # delete local option antes de publicar
+        if not environment in ['production', 'staging']:
             raise exceptions.ValidationError("environment field is not valid")
 
         self.url_api = URIs.get(environment)

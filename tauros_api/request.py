@@ -99,13 +99,18 @@ class TaurosAPI():
         :param data: body request data
         :type data: dict
         """
-        request_data = urllib.parse.urlencode(data)
+        if not isinstance(data, dict):
+            return None
+        try:
+            request_data = urllib.parse.urlencode(data)
 
-        api_sha256 = hashlib.sha256(request_data.encode()).digest()
+            api_sha256 = hashlib.sha256(request_data.encode()).digest()
 
-        api_hmac = hmac.new(base64.b64decode(self.api_secret), api_sha256, hashlib.sha512)
+            api_hmac = hmac.new(base64.b64decode(self.api_secret), api_sha256, hashlib.sha512)
 
-        api_signature = base64.b64encode(api_hmac.digest())
+            api_signature = base64.b64encode(api_hmac.digest())
+        except Exception:
+            raise exceptions.ValidationError('api_secret invalid')
 
         return api_signature.decode()
 

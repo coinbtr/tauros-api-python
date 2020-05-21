@@ -1,0 +1,7 @@
+language: python
+jobs:
+  include:
+    - language: python
+      python: 3.8
+      script:
+      - python -m unittest tests

@@ -1,5 +1,7 @@
 # Tauros API V2 Python Module.
 
+[![Build Status](https://travis-ci.org/coinbtr/tauros-api-python.svg?branch=master)](https://travis-ci.org/coinbtr/tauros-api-python)
+
 ## How To Install
 ```sh
 $ pip install tauros-api

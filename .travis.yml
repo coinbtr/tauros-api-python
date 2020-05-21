@@ -3,5 +3,7 @@ jobs:
   include:
     - language: python
       python: 3.8
+      before_install:
+      - pip install request
       script:
       - python -m unittest tests

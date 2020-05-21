@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="tauros-api",
-    version="0.1.0",
+    version="1.0.0",
     author="Altcoins Mex S.A.P.I. de C.V.",
     author_email="contacto@tauros.io",
     description="This module is for connection with Tauros API.",
@@ -15,7 +15,7 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
-        "License :: OSI Approved :: MIT License",
+        "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
         "Operating System :: OS Independent",
     ],
     python_requires='>=3.6',

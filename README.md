@@ -1,6 +1,7 @@
 # Tauros API V2 Python Module.
 
 [![Build Status](https://travis-ci.org/coinbtr/tauros-api-python.svg?branch=master)](https://travis-ci.org/coinbtr/tauros-api-python)
+[![Coverage Status](https://coveralls.io/repos/github/coinbtr/tauros-api-python/badge.svg?branch=master)](https://coveralls.io/github/coinbtr/tauros-api-python?branch=master)
 
 ## How To Install
 ```sh

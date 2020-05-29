@@ -10,4 +10,4 @@ jobs:
   include:
     - language: python
       script:
-      - pytest
+      - pytest --cov-report=xml --cov=tauros_api tests/

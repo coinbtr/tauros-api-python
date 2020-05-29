@@ -15,7 +15,7 @@ api_key = 'cae5fb9186b7f940d2a9031e79f0d58043ebf114'
 
 api_secret = 'eada71676b6a9c1189f120160288bfed6610c87ea352a7c61ae6406ac64bb58f'
 
-tauros = TaurosAPI(api_key, api_secret)
+tauros = TaurosAPI(api_key, api_secret, staging=True) # default staging=False
 
 path = '/api/v1/trading/placeorder/'
 

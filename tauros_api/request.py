@@ -12,8 +12,7 @@ except ImportError:
 from tauros_api import exceptions
 from tauros_api.response import Response
 
-# api_url = 'https://api.staging.tauros.io'
-api_url = 'http://192.168.139.130:8000'
+api_url = 'https://api.staging.tauros.io'
 api_staging_url = 'https://api.tauros.io'
 
 

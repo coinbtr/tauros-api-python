@@ -1,6 +1,9 @@
 # Standard library imports...
 from unittest import TestCase
-from unittest.mock import Mock, patch
+try:
+    from unittest.mock import patch
+except ImportError:
+    from mock import patch
 
 from tauros_api.request import TaurosAPI, Response
 

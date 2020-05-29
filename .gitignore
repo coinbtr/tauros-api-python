@@ -3,4 +3,6 @@
 build
 dist
 
+*.pyc
+
 tauros_api.egg-info/

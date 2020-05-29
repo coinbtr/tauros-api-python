@@ -8,4 +8,4 @@ jobs:
   include:
     - language: python
       script:
-      - python -m unittest tests && py.test --cov-report=xml --cov=tauros_io tests/
+      - pytest

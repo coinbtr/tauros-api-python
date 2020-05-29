@@ -2,7 +2,8 @@
 
 build
 dist
-
+.coverage
+coverage.*
 *.pyc
 
 tauros_api.egg-info/

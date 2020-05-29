@@ -1,7 +1,11 @@
 language: python
-python: 3.8
+python:
+  - "3.8"
+  - "2.7"
+install:
+  - pip install pytest-cov
 jobs:
   include:
     - language: python
       script:
-      - python -m unittest tests
+      - python -m unittest tests && py.test --cov-report=xml --cov=tauros_io tests/

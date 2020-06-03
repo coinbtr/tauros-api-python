@@ -12,8 +12,8 @@ except ImportError:
 from tauros_api import exceptions
 from tauros_api.response import Response
 
-api_url = 'https://api.staging.tauros.io'
-api_staging_url = 'https://api.tauros.io'
+api_url = 'https://api.tauros.io'
+api_staging_url = 'https://api.staging.tauros.io'
 
 
 class TaurosAPI():
@@ -93,8 +93,6 @@ class TaurosAPI():
             return None
         try:
             request_data = urlencode(data)
-
-            print(request_data)
 
             message = str(nonce) + method.upper() + path + request_data
 

@@ -1,9 +1,9 @@
 # Standard library imports...
 from unittest import TestCase
 try:
-    from unittest.mock import patch
+    from unittest.mock import patch, MagicMock
 except ImportError:
-    from mock import patch
+    from mock import patch, MagicMock
 
 from tauros_api.request import TaurosAPI
 
@@ -18,12 +18,24 @@ class RequestPost(TestCase):
     api_secret = 'eada71676b6a9c1189f120160288bfed6610c87ea352a7c61ae6406ac64bb58f'
 
     def setUp(self):
-        pass
+        self.tauros = TaurosAPI(api_key=self.api_key, api_secret=self.api_secret)
+
+    @patch('time.time', MagicMock(return_value=12345))
+    def test_sign_method(self):
+        _signature = 'rRls78tC/oxC77kc0jx+CivA1/ybCIaTyYs4W5jAFKRM1LMcB0MnulDwwMGnD6kQY/jrhCSQUxJZFmR9AfF5PQ=='
+        nonce = self.tauros._nonce()
+        method = 'POST'
+        path = '/api/v2/test/'
+        data = {
+            'name': 'Moises De La Cruz',
+            'age': 23,
+            'email': 'moisesdelacruz.dev@gmail.com'
+        }
+        signature = self.tauros._sign(data, nonce, method, path)
+        self.assertEqual(_signature, signature)
 
     @patch('requests.request')
     def test_post_response_is_ok(self, mock_get):
-        tauros = TaurosAPI(api_key=self.api_key, api_secret=self.api_secret)
-
         # simulate response
         exam_body = {
             'side': 'buy',
@@ -49,7 +61,7 @@ class RequestPost(TestCase):
             "type": "LIMIT",
             "price": "250000"
         }
-        response = tauros.post(path, data)
+        response = self.tauros.post(path, data)
 
         # If the request is sent successfully, then I expect a response to be returned.
         self.assertEqual(response.status_code, 200)
@@ -57,8 +69,6 @@ class RequestPost(TestCase):
 
     @patch('requests.request')
     def test_get_method(self, mock_get):
-        tauros = TaurosAPI(api_key=self.api_key, api_secret=self.api_secret)
-
         # simulate response
         exam_body = {
             'biometric_verified': False,
@@ -97,7 +107,7 @@ class RequestPost(TestCase):
 
         path = '/api/v1/perofile/'
 
-        response = tauros.get(path)
+        response = self.tauros.get(path)
 
         # If the request is sent successfully, then I expect a response to be returned.
         self.assertEqual(response.status_code, 200)

@@ -112,3 +112,22 @@ class RequestPost(TestCase):
         # If the request is sent successfully, then I expect a response to be returned.
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.body, exam_body)
+
+    @patch('requests.request')
+    def test_patch_method(self, mock_patch):
+        exam_body = {
+            'phone_number': '+525523236412',
+        }
+        exam_res = Response()
+        exam_res.status_code = 200
+        exam_res.body = exam_body
+
+        mock_patch.return_value = exam_res
+
+        path = '/api/v1/perofile/'
+
+        response = self.tauros.patch(path, exam_body)
+
+        # If the request is sent successfully, then I expect a response to be returned.
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.body, exam_body)

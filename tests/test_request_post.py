@@ -22,14 +22,14 @@ class RequestPost(TestCase):
 
     @patch('time.time', MagicMock(return_value=12345))
     def test_sign_method(self):
-        _signature = 'rRls78tC/oxC77kc0jx+CivA1/ybCIaTyYs4W5jAFKRM1LMcB0MnulDwwMGnD6kQY/jrhCSQUxJZFmR9AfF5PQ=='
+        _signature = '8g863L/B/cfzMePFMe6CsY4c3Hp7uZx+7gN6qOuR/qOiTtgx927w6FpPPA8bp+4e7Dja2a/NN78LFLQvCuXRrg=='
         nonce = self.tauros._nonce()
         method = 'POST'
         path = '/api/v2/test/'
         data = {
-            'name': 'Moises De La Cruz',
             'age': 23,
-            'email': 'moisesdelacruz.dev@gmail.com'
+            'email': 'moisesdelacruz.dev@gmail.com',
+            'name': 'Moises De La Cruz'
         }
         signature = self.tauros._sign(data, nonce, method, path)
         self.assertEqual(_signature, signature)

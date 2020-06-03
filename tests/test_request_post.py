@@ -5,7 +5,12 @@ try:
 except ImportError:
     from mock import patch
 
-from tauros_api.request import TaurosAPI, Response
+from tauros_api.request import TaurosAPI
+
+class Response():
+    body = None
+    def json(self):
+        return self.body
 
 
 class RequestPost(TestCase):
@@ -15,7 +20,7 @@ class RequestPost(TestCase):
     def setUp(self):
         pass
 
-    @patch.object(TaurosAPI, '_request')
+    @patch('requests.request')
     def test_post_response_is_ok(self, mock_get):
         tauros = TaurosAPI(api_key=self.api_key, api_secret=self.api_secret)
 
@@ -31,7 +36,6 @@ class RequestPost(TestCase):
 
         exam_res = Response()
         exam_res.status_code = 200
-        exam_res.body = exam_body
 
         mock_get.return_value = exam_res
 
@@ -49,10 +53,9 @@ class RequestPost(TestCase):
 
         # If the request is sent successfully, then I expect a response to be returned.
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.body, exam_body)
 
 
-    @patch.object(TaurosAPI, '_request')
+    @patch('requests.request')
     def test_get_method(self, mock_get):
         tauros = TaurosAPI(api_key=self.api_key, api_secret=self.api_secret)
 

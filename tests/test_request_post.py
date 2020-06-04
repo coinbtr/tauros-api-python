@@ -6,6 +6,7 @@ except ImportError:
     from mock import patch, MagicMock
 
 from tauros_api.request import TaurosAPI
+from tauros_api import exceptions
 
 class Response():
     body = None
@@ -13,7 +14,7 @@ class Response():
         return self.body
 
 
-class RequestPost(TestCase):
+class RequestSuccess(TestCase):
     api_key = 'cae5fb9186b7f940d2a9031e79f0d58043ebf114'
     api_secret = 'eada71676b6a9c1189f120160288bfed6610c87ea352a7c61ae6406ac64bb58f'
 
@@ -87,12 +88,12 @@ class RequestPost(TestCase):
             'is_superuser': True,
             'last_name': 'Bar',
             'level': 1,
-            'number': '23872674',
+            'number': '23812674',
             'phone_number': '+52*******330',
             'phone_verified': False,
             'pk': 1,
             'preference': {'coin_symbol': '\u20ac', 'default_coin': 'MXN'},
-            'reference_link': 'bW9pc2VzQHThdXdvcy5pbw==',
+            'reference_link': 'bW9pc2VzQHEhdXdvcy5pbw==',
             'require_password_change': False,
             'second_last_name': '1',
             'two_factor': False,
@@ -131,3 +132,65 @@ class RequestPost(TestCase):
         # If the request is sent successfully, then I expect a response to be returned.
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.body, exam_body)
+
+    @patch('requests.request')
+    def test_put_method(self, mock_put):
+        exam_body = {
+            'name': 'foo',
+            'last': 'bar'
+        }
+        exam_res = Response()
+        exam_res.status_code = 200
+        exam_res.body = exam_body
+
+        mock_put.return_value = exam_res
+
+        path = '/api/v1/test/'
+
+        response = self.tauros.put(path, exam_body)
+        self.assertEqual(response.body, exam_body)
+
+        # If the request is sent successfully, then I expect a response to be returned.
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.body, exam_body)
+
+    @patch('requests.request')
+    def test_delete_method(self, mock_delete):
+        exam_res = Response()
+        exam_res.status_code = 204
+
+        mock_delete.return_value = exam_res
+
+        path = '/api/v1/perofile/'
+
+        response = self.tauros.delete(path)
+
+        # If the request is sent successfully, then I expect a response to be returned.
+        self.assertEqual(response.status_code, 204)
+
+
+class BadRequest(TestCase):
+    api_key = 'cae5fb9186b7f940d2a9031e79f0d58043ebf114'
+    api_secret = 'hello tauros'
+
+    def setUp(self):
+        self.tauros = TaurosAPI(api_key=self.api_key, api_secret=self.api_secret)
+
+    @patch('time.time', MagicMock(return_value=12345))
+    def test_sign_method_invalid_data(self):
+        nonce = self.tauros._nonce()
+        method = 'POST'
+        path = '/api/v2/test/'
+        data = 12
+        signature = self.tauros._sign(data, nonce, method, path)
+        self.assertEqual(None, signature)
+
+    @patch('time.time', MagicMock(return_value=12345))
+    def test_sign_method_bad_api_secret(self):
+        nonce = self.tauros._nonce()
+        method = 'POST'
+        path = '/api/v2/test/'
+        data = {}
+        with self.assertRaises(exceptions.ValidationError) as context:
+            self.tauros._sign(data, nonce, method, path)
+        self.assertTrue('api_secret invalid' in context.exception)

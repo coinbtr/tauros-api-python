@@ -193,4 +193,4 @@ class BadRequest(TestCase):
         data = {}
         with self.assertRaises(exceptions.ValidationError) as context:
             self.tauros._sign(data, nonce, method, path)
-        self.assertTrue('api_secret invalid' in context.exception)
+        self.assertEqual('api_secret invalid', str(context.exception))

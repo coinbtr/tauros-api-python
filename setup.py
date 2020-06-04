@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="tauros-api",
-    version="1.3.0",
+    version="1.4.15",
     author="Altcoins Mex S.A.P.I. de C.V.",
     author_email="contacto@tauros.io",
     description="This module is for connection with Tauros API.",

@@ -7,4 +7,4 @@ install:
 jobs:
   include:
     - language: python
-script: coverage run --source=tauros_api -m pytest tests/
+script: coverage run --source=tauros_api -m pytest tests/ && COVERALLS_REPO_TOKEN=$COVERALLS_REPO_TOKEN coveralls

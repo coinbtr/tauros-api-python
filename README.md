@@ -12,9 +12,9 @@ $ pip install tauros-api
 ```py
 from tauros_api import TaurosAPI
 
-api_key = 'cae5fb9186b7f940d2a9031e79f0d58043ebf114'
+api_key = '5b4c752447da0494ddbaeb4a8e046550fd43f21a'
 
-api_secret = 'eada71676b6a9c1189f120160288bfed6610c87ea352a7c61ae6406ac64bb58f'
+api_secret = 'ZjhiNGVhOTNlZDZkNTJlOTE5MzlhNjFjNWQwNjI2MjFhZjM4N2I5YTE4OTYyMWQ0MjU2MTliNDk3ZjYxODE1Mg=='
 
 tauros = TaurosAPI(api_key, api_secret, staging=True) # default staging=False
 

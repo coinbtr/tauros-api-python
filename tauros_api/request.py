@@ -4,10 +4,6 @@ import time
 import hmac
 import hashlib
 import base64
-try:
-    from urllib.parse import urlencode
-except ImportError:
-    from urllib import urlencode
 
 from tauros_api import exceptions
 from tauros_api.response import Response
@@ -92,7 +88,7 @@ class TaurosAPI():
         if not isinstance(data, dict):
             return None
         try:
-            request_data = urlencode(data)
+            request_data = json.dumps(data)
 
             message = str(nonce) + method.upper() + path + request_data
 

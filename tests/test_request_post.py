@@ -15,15 +15,15 @@ class Response():
 
 
 class RequestSuccess(TestCase):
-    api_key = 'cae5fb9186b7f940d2a9031e79f0d58043ebf114'
-    api_secret = 'eada71676b6a9c1189f120160288bfed6610c87ea352a7c61ae6406ac64bb58f'
+    api_key = '5b4c752447da0494ddbaeb4a8e046550fd43f21a'
+    api_secret = 'ZjhiNGVhOTNlZDZkNTJlOTE5MzlhNjFjNWQwNjI2MjFhZjM4N2I5YTE4OTYyMWQ0MjU2MTliNDk3ZjYxODE1Mg=='
 
     def setUp(self):
         self.tauros = TaurosAPI(api_key=self.api_key, api_secret=self.api_secret)
 
     @patch('time.time', MagicMock(return_value=12345))
     def test_sign_method(self):
-        _signature = '8g863L/B/cfzMePFMe6CsY4c3Hp7uZx+7gN6qOuR/qOiTtgx927w6FpPPA8bp+4e7Dja2a/NN78LFLQvCuXRrg=='
+        _signature = '1Vs8kXcd6xTW7LigOJeyhYdrIqVYuHmg/Z6jWG/0qZinv6cGZlkjLOfan657CEI+Tr8cJW/nV1SrcKA+NTDkvQ=='
         nonce = self.tauros._nonce()
         method = 'POST'
         path = '/api/v2/test/'
@@ -170,7 +170,7 @@ class RequestSuccess(TestCase):
 
 
 class BadRequest(TestCase):
-    api_key = 'cae5fb9186b7f940d2a9031e79f0d58043ebf114'
+    api_key = '5b4c752447da0494ddbaeb4a8e046550fd43f21a'
     api_secret = 'hello tauros'
 
     def setUp(self):

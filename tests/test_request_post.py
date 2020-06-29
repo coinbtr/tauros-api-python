@@ -23,7 +23,7 @@ class RequestSuccess(TestCase):
 
     @patch('time.time', MagicMock(return_value=12345))
     def test_sign_method(self):
-        _signature = '1Vs8kXcd6xTW7LigOJeyhYdrIqVYuHmg/Z6jWG/0qZinv6cGZlkjLOfan657CEI+Tr8cJW/nV1SrcKA+NTDkvQ=='
+        _signature = '1eDbOr4oSqmzxmj0xzlsVES4V4ezLYOaALG2MU9sRRB8C4zSxqnnofN9/lRMUFcLbHbH4hRudM0pMjCxP1OBGQ=='
         nonce = self.tauros._nonce()
         method = 'POST'
         path = '/api/v2/test/'

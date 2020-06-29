@@ -9,7 +9,8 @@ from tauros_api import exceptions
 from tauros_api.response import Response
 
 api_url = 'https://api.tauros.io'
-api_staging_url = 'https://api.staging.tauros.io'
+# api_staging_url = 'https://api.staging.tauros.io'
+api_staging_url = 'https://moises.coinbtr.com'
 
 
 class TaurosAPI():
@@ -88,7 +89,7 @@ class TaurosAPI():
         if not isinstance(data, dict):
             return None
         try:
-            request_data = json.dumps(data)
+            request_data = json.dumps(data, separators=(',', ':'))
 
             message = str(nonce) + method.upper() + path + request_data
 

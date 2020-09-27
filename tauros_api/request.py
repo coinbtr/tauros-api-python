@@ -9,8 +9,7 @@ from tauros_api import exceptions
 from tauros_api.response import Response
 
 api_url = 'https://api.tauros.io'
-# api_staging_url = 'https://api.staging.tauros.io'
-api_staging_url = 'https://moises.coinbtr.com'
+api_staging_url = 'https://api.staging.tauros.io'
 
 
 class TaurosAPI():
